@@ -2,6 +2,7 @@ import csv
 import random
 import pandas as pd
 import numpy as np
+from math import sqrt
 
 
 #with open('sample.csv','rb') as csvfile:
@@ -19,14 +20,48 @@ df['Day']= np.random.randint(1,31, df.shape[0])
 df['Gender']= np.random.randint(0,2, df.shape[0])
 
 
+train_data=df[:int(0.7*10)]
+test_data = df[int(0.7*10):]
 
-input = input("Enter no. btw 1-100")
+
+
+print '\n\n\t\t  PREDICT GENDER FROM DOB  \n\n'
 
 
 
-day=df['Day'].values
-gender=df['Gender'].values
+input = input("Enter BirthDate : \t \n")
 
+
+
+train_date=train_data['Day'].values
+train_gender=train_data['Gender'].values
+test_date=test_data['Day'].values
+test_gender=test_data['Gender'].values
+
+
+print '\tRANDOMLY GENERATED DATASET \n'
 print df 
-print day
-print gender
+
+print '\t TRAINING DATA \n'
+print train_data
+
+print '\t TESTING DATA \n '
+print test_data
+
+small = input
+gender=0
+
+for i in range(len(train_date)):
+     euc_dis = sqrt(pow((input-train_date[i]),2))
+     if euc_dis < small:
+         small = euc_dis
+         gender = train_gender[i]
+
+
+if (gender == 0):
+    req_gender = 'MALE'
+else:
+    req_gender = 'FEMALE'
+
+print '\n Gender Obtained \t', req_gender
+     
