@@ -63,5 +63,33 @@ if (gender == 0):
 else:
     req_gender = 'FEMALE'
 
+
+
+
+
+print '\n\n RESULTS'
 print '\n Gender Obtained \t', req_gender
-     
+
+
+
+gender_temp = 0
+correctness =0
+
+for j in range(len(test_date)):
+        input = test_date[j]
+        for i in range(len(train_date)):
+               euc_dis = sqrt(pow((input-train_date[i]),2))
+               if euc_dis < small:
+                   small = euc_dis
+                   gender_temp = train_gender[i]
+        
+        if(gender_temp == test_gender[j]):
+             correctness +=1
+
+
+
+accuracy = float(correctness)/len(test_data)*100
+
+print '\n Accuracy   :' , accuracy
+
+        
